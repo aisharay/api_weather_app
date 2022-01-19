@@ -1,4 +1,5 @@
-<div id="divWeatherMain" *ngIf="!error"> 
+<div *ngIf="!loadVar">
+<div id="divWeatherMain" *ngIf="!error" > 
     <div *ngIf="weatherData.isDay" class="weatherWidgetRow"> 
         <i class="fas fa-3x fa-sun sun"></i>
      </div> 
@@ -27,3 +28,7 @@
 <div *ngIf="error">
    <div style="margin-right:30px" >{{error}}</div>
 </div>
+</div>
+<div *ngIf="loadVar">
+    <div >We are fetching data ! Please wait...</div>
+ </div>

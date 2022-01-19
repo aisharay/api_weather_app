@@ -20,9 +20,11 @@ export class AppComponent {
    
     
   }
+  loadVar=true;
   error=null;
   ngOnInit(){
          this.WeatherData.getWeatherData().subscribe((data: any)=>{
+          this.loadVar=false;
          console.warn("data",data)
          this.weatherData = data; 
          let sunsetTime = new Date(this.weatherData.sys.sunset * 1000); 
@@ -35,6 +37,7 @@ export class AppComponent {
          this.weatherData.temp_feels_like = (this.weatherData.main.feels_like - 273.15).toFixed(0);  
   },
   (error)=>{
+    this.loadVar=false;
     console.log(error);
 this.error =error.name;
   }
