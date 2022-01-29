@@ -1,8 +1,9 @@
-<form >
-  <div class="form-group">
+
+<div (placenameupdate)="placenameupdate($event)">
+  <div >
     <label for="placename">Add Your Place</label>
-    <input type="text" class="form-control" id="placename" aria-describedby="textHelp">
+    <input required type="text" class="form-control" id="placename" aria-describedby="textHelp" [(ngModel)]="placename" value="bhubaneswar" >
     <small id="textHelp" class="form-text text-muted">Please! input a valid Place.</small>
   </div>
-  <button  class="btn btn-primary" (Click)="onClick()">Show</button>
-</form>
+  <button  class="btn btn-primary" (click)="onsubmit()">Show</button>
+</div>

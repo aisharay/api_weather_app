@@ -6,6 +6,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { ForminputComponent } from './mycomponent/forminput/forminput.component';
 import { NgChartsModule } from 'ng2-charts';
 import { ComparisonComponent } from './mycomponent/comparison/comparison.component';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -15,7 +16,8 @@ import { ComparisonComponent } from './mycomponent/comparison/comparison.compone
   imports: [
     BrowserModule,
     HttpClientModule,
-    NgChartsModule
+    NgChartsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

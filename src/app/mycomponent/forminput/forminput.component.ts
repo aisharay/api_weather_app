@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Placename } from 'src/app/placename';
+import {WeatherService} from 'src/app//weather.service';
 
 @Component({
   selector: 'app-forminput',
@@ -6,8 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./forminput.component.css']
 })
 export class ForminputComponent {
-onClick(){
-  console.log("Form Submitted");
+
+  placename:string="bhubaneswar";
+
+@Output() placenameupdate: EventEmitter<Placename> =new EventEmitter();
+
+onsubmit(){
+  console.log("Form Submitted")
+  const Placename={
+    name:this.placename
+  }
+  console.log(this.placename)
+  this.placenameupdate.emit(Placename)
+
 }
   
 
