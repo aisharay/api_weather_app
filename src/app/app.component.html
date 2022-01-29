@@ -1,3 +1,10 @@
+<div class="container">
+
+
+    <app-forminput></app-forminput>
+
+<br>
+
 <div *ngIf="!loadVar">
 <div id="divWeatherMain" *ngIf="!error" > 
     <div *ngIf="weatherData.isDay" class="weatherWidgetRow"> 
@@ -32,3 +39,7 @@
 <div *ngIf="loadVar">
     <div >We are fetching data ! Please wait...</div>
  </div>
+ <br>
+ <br>
+ <app-comparison></app-comparison>
+</div>
