@@ -11,17 +11,17 @@ export class ForminputComponent {
 
   placename:string="bhubaneswar";
 
-@Output() placenameupdate: EventEmitter<Placename> =new EventEmitter();
+// @Output() placenameupdate: EventEmitter<any> =new EventEmitter<any>();
 
-onsubmit(){
-  console.log("Form Submitted")
-  const Placename={
-    name:this.placename
-  }
-  console.log(this.placename)
-  this.placenameupdate.emit(Placename)
+// onsubmit(){
+//   console.log("Form Submitted")
+//   const Placename={
+//     name:this.placename
+//   }
+//   console.log(this.placename)
+//   this.placenameupdate.emit(Placename)
 
-}
+// }
   
 
 }

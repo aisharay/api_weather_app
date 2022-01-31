@@ -1,44 +1,58 @@
 <div class="container">
-   
-  <app-forminput > </app-forminput>
-  
-<br>
+  <!-- <app-forminput > </app-forminput> -->
+  <div>
+    <label for="placename">Add Your Place</label>
+    <input
+      required
+      type="text"
+      class="form-control"
+      id="placename"
+      aria-describedby="textHelp"
+      [(ngModel)]="WeatherData.placename"
+    />
+    <small id="textHelp" class="form-text text-muted"
+      >Please! input a valid Place.</small
+    >
+  </div>
+  <button class="btn btn-primary" (click)="getWeatherData()">Show</button>
 
-<div *ngIf="!loadVar">
-<div id="divWeatherMain" *ngIf="!error" > 
-    <div *ngIf="weatherData.isDay" class="weatherWidgetRow"> 
+  <br />
+
+  <div *ngIf="!loadVar">
+    <div id="divWeatherMain" *ngIf="!error">
+      <div *ngIf="weatherData.isDay" class="weatherWidgetRow">
         <i class="fas fa-3x fa-sun sun"></i>
-     </div> 
-     <div *ngIf="!weatherData.isDay" class="weatherWidgetRow"> 
-         <i class="fas fa-3x fa-moon moon"></i> 
-    </div> 
-    <div class="weatherWidgetRow cloudDiv">
-         <i class="fas fa-cloud fa-3x cloud"></i> 
+      </div>
+      <div *ngIf="!weatherData.isDay" class="weatherWidgetRow">
+        <i class="fas fa-3x fa-moon moon"></i>
+      </div>
+      <div class="weatherWidgetRow cloudDiv">
+        <i class="fas fa-cloud fa-3x cloud"></i>
+      </div>
+      <div class="weatherWidgetRow" style="font-size: 32px; margin-top: 5px">
+        {{ weatherData.temp_celcius }}°
+      </div>
+      <div class="weatherWidgetRow" style="font-size: 12px">
+        {{ weatherData.temp_min }}° / {{ weatherData.temp_max }}°
+      </div>
+      <div class="weatherWidgetRow" style="font-size: 12px">
+        Feels Like: {{ weatherData.temp_feels_like }}°
+      </div>
+      <div class="weatherWidgetRow" style="font-size: 25px; margin-top: 10px">
+        {{ weatherData.name }}
+      </div>
+      <div class="weatherWidgetRow" style="font-size: 12px">
+        Humidity: {{ weatherData.main.humidity }}%
+      </div>
     </div>
-    <div class="weatherWidgetRow" style="font-size: 32px;margin-top: 5px;">
-        {{weatherData.temp_celcius}}°
-    </div> 
-    <div class="weatherWidgetRow" style="font-size: 12px;">
-        {{weatherData.temp_min}}° / {{weatherData.temp_max}}°
+    <div *ngIf="error">
+      <div style="margin-right: 30px">{{ error }}</div>
     </div>
-     <div class="weatherWidgetRow" style="font-size: 12px;">
-        Feels Like: {{weatherData.temp_feels_like}}°
-    </div> 
-     <div class="weatherWidgetRow" style="font-size: 25px;margin-top: 10px;">
-        {{weatherData.name}}
-    </div> 
-     <div class="weatherWidgetRow" style="font-size: 12px;">
-        Humidity: {{weatherData.main.humidity}}%
-    </div>
-</div>
-<div *ngIf="error">
-   <div style="margin-right:30px" >{{error}}</div>
-</div>
-</div>
-<div *ngIf="loadVar">
-    <div >We are fetching data ! Please wait...</div>
- </div>
- <br>
- <br>
- <app-comparison></app-comparison>
+  </div>
+  <div *ngIf="loadVar">
+    <div>We are fetching data ! Please wait...</div>
+  </div>
+  <br />
+  <br />
+  <app-comparison></app-comparison>
 </div>
