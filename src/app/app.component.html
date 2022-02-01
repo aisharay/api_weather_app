@@ -1,5 +1,4 @@
 <div class="container">
-  <!-- <app-forminput > </app-forminput> -->
   <div>
     <label for="placename">Add Your Place</label>
     <input
@@ -15,6 +14,9 @@
     >
   </div>
   <button class="btn btn-primary" (click)="getWeatherData()">Show</button>
+
+
+
 
   <br />
 
@@ -54,5 +56,21 @@
   </div>
   <br />
   <br />
-  <app-comparison></app-comparison>
+
+
+
+  <div >
+    <button mat-button mat-raised-button color="primary" style="margin-left: 50%;"(click)="updateval()">Update Graph</button>
+    <div class="container" style="width: 1000px; background-color: rgb(171, 233, 212); 
+    " >
+    <div style="display: block">
+      <canvas baseChart
+        [data]="barChartData"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [type]="barChartType">
+      </canvas>
+    </div>
+  </div>
+</div>
 </div>
