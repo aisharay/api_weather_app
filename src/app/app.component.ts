@@ -3,6 +3,7 @@ import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { WeatherService } from './weather.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,6 +17,8 @@ export class AppComponent {
   weatherDatas:any;
   temp:any=[];
   humidity: any = [];
+  daytemp:any=[ 65, 59, 80, 81, 56, 55, 40 ];
+  dayhumidity:any=[ 28, 48, 40, 19, 86, 27, 90 ];
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
   public barChartOptions: ChartConfiguration['options'] = {
@@ -67,6 +70,25 @@ export class AppComponent {
       },
     ],
   };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
   ngOnInit() {
     this.getWeatherData();
     this.getComparisonData1();
@@ -129,5 +151,104 @@ export class AppComponent {
     })
   }
 
+
+
+  getLineChartData(): void {
+    this.error=null;
+    var locations = ['hyderabad', 'delhi', 'mumbai', 'goa' ,'pune'];
+    locations.map(async(location: any) => {
+      await this.WeatherData.getComparisonData1(location).subscribe(
+        (datas: any) => {
+          this.weatherDatas = datas;
+          this.temp.push((this.weatherDatas.main.temp - 273.15).toFixed(0));
+          this.humidity.push(this.weatherDatas.main.humidity);
+          this.barChartData.datasets[0].data =this.temp;
+          this.barChartData.datasets[1].data =this.humidity;
+          this.chart?.update();
+        },
+        (error: { name: any; }) => {
+          console.log(error);
+          this.error = error.name;
+        }
+      );
+    })
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  public lineChartData: ChartConfiguration['data'] = {
+    datasets: [
+      {
+        data: this.daytemp,
+        label: 'Temp',
+        backgroundColor: 'rgba(148,159,177,0.2)',
+        borderColor: 'rgba(148,159,177,1)',
+        pointBackgroundColor: 'rgba(148,159,177,1)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(148,159,177,0.8)',
+        fill: 'origin',
+      },
+      {
+        data: this.dayhumidity,
+        label: 'Humidity',
+        backgroundColor: 'rgba(77,83,96,0.2)',
+        borderColor: 'rgba(77,83,96,1)',
+        pointBackgroundColor: 'rgba(77,83,96,1)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(77,83,96,1)',
+        fill: 'origin',
+      }
+    ],
+    labels: [ '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00' ]
+  };
+
+  public lineChartOptions: ChartConfiguration['options'] = {
+    elements: {
+      line: {
+        tension: 0.5
+      }
+    },
+    scales: {
+      // We use this empty structure as a placeholder for dynamic theming.
+      x: {},
+      'y-axis-0':
+        {
+          position: 'left',
+        },
+      'y-axis-1': {
+        position: 'right',
+        grid: {
+          color: 'rgba(255,0,0,0.3)',
+        },
+        ticks: {
+          color: 'red'
+        }
+      }
+    },
+
+    plugins: {
+      legend: { display: true }
+    }
+  };
+
+  public lineChartType: ChartType = 'line';
+
+  @ViewChild(BaseChartDirective) chart1?: BaseChartDirective;
+
+  private static generateNumber(i: number): number {
+    return Math.floor((Math.random() * (i < 2 ? 100 : 1000)) + 1);
+  }
 
 }
